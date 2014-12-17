@@ -1,0 +1,31 @@
+{
+  "name": "cyclonp2p",
+  "version": "0.0.1",
+  "description": "Implementation of the p2p-algorithm CYCLON",
+  "main": "lib/cyclon.js",
+  "scripts": {
+    "test": "index.html",
+    "debug": "browserify lib/cyclon.js --debug --s Cyclon > build/cyclon.bundle.debug.js",
+    "build": "browserify lib/cyclon.js --s Cyclon | uglifyjs > build/cyclon.bundle.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/justayak/cyclonp2p.git"
+  },
+  "keywords": [
+    "CYCLON",
+    "gossip",
+    "p2p",
+    "peer-to-peer"
+  ],
+  "author": "= <=>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/justayak/cyclonp2p/issues"
+  },
+ "dependencies": {
+    "yutils" : "0.0.3",
+     "handshake-webrtc" : "0.0.2"
+  },
+  "homepage": "https://github.com/justayak/cyclonp2p"
+}
