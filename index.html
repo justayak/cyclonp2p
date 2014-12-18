@@ -3,12 +3,63 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
+    <style>
+        textarea{
+            width: 300px;
+            height: 100px;
+            resize: none;
+        }
+    </style>
     <script src="build/cyclon.bundle.debug.js"></script>
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 </head>
 <body>
+<div>
+    <span id="address"></span>
+</div>
+<button id="active">active</button>
+<button id="active2">active->accept</button>
+<button id="passive">passive</button>
+<br/>
+<textarea id="txt" placeholder="data"></textarea>
 
 </body>
 <script>
+$(function () {
 
+    var applyAnswer = null;
+
+    $("#address").html(Cyclon.Cyclon.address());
+
+    $("#active").on('click', function () {
+        applyAnswer = Cyclon.bootstrap({}, {
+            onOffer: function (offer) {
+                $("#txt").val(offer);
+            }
+        }, function () {
+            console.log("OPEN");
+        });
+    });
+
+    $("#passive").on('click', function () {
+        var offer = $("#txt").val();
+        $("#txt").val("");
+        applyAnswer = Cyclon.bootstrap({}, {
+            onAnswer: function (answer) {
+                $("#txt").val(answer);
+            },
+            offer: offer
+        }, function () {
+            console.log("OPEN");
+        });
+    });
+
+    $("#active2").on('click', function () {
+        if (applyAnswer === null) throw new Error("noo, we must bootstrap cyclon first!");
+        var answer = $("#txt").val();
+        applyAnswer(answer);
+    });
+
+});
 </script>
 </html>
