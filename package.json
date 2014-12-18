@@ -25,7 +25,7 @@
   },
  "dependencies": {
     "yutils" : ">=0.0.5",
-     "handshake-webrtc" : ">=0.0.3"
+     "handshake-webrtc" : ">=0.0.4"
   },
   "devDependencies": {
       "jasmine-node": "2.0.x"
