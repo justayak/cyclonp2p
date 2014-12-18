@@ -24,8 +24,9 @@
     "url": "https://github.com/justayak/cyclonp2p/issues"
   },
  "dependencies": {
-    "yutils" : ">=0.0.5",
-     "handshake-webrtc" : ">=0.0.5"
+    "yutils" : ">=0.0.8",
+     "handshake-webrtc" : ">=0.0.5",
+     "underscore" : ">=1.7.0"
   },
   "devDependencies": {
       "jasmine-node": "2.0.x"
