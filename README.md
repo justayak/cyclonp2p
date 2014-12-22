@@ -1,3 +1,5 @@
 # CYCLON
 
 Peer-to-Peer Lib
+
+CANNOT BE USED RIGHT NOW!
