@@ -1,6 +1,6 @@
 {
   "name": "cyclonp2p",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Implementation of the p2p-algorithm CYCLON",
   "main": "lib/cyclon.js",
   "scripts": {
@@ -25,7 +25,8 @@
   },
  "dependencies": {
     "yutils" : ">=0.0.8",
-     "handshake-webrtc" : ">=0.0.5"
+     "handshake-webrtc" : ">=0.0.5",
+     "underscore" : ">=1.7.0"
   },
   "devDependencies": {
       "jasmine-node": "2.0.x"
