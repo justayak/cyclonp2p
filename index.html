@@ -27,9 +27,16 @@
 <script>
 $(function () {
 
+
+    var cyclon = new Cyclon.Class();
+
+    console.log(cyclon);
+
+
+
     var applyAnswer = null;
 
-    $("#address").html(Cyclon.Cyclon.address());
+    //$("#address").html(Cyclon.Cyclon.address());
 
     $("#active").on('click', function () {
         applyAnswer = Cyclon.bootstrap({}, {

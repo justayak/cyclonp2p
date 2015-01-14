@@ -4,7 +4,7 @@
   "description": "Implementation of the p2p-algorithm CYCLON",
   "main": "lib/cyclon.js",
   "scripts": {
-    "test": "index.html",
+    "test": "jasmine-node test/spec",
     "debug": "browserify lib/cyclon.js --debug --s Cyclon > build/cyclon.bundle.debug.js",
     "build": "browserify lib/cyclon.js --s Cyclon | uglifyjs > build/cyclon.bundle.js"
   },
