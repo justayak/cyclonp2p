@@ -22,12 +22,6 @@ describe("init", function () {
         expect(result).toEqual([{address:"a"}]);
     });
 
-    it("should sample (1)", function () {
-        var result = Protocol.sample([
-            {address:"a"},{address:"b"},{address:"c"}],["b","c"],1);
-        expect(result).toEqual({address:"a"});
-    });
-
     it("should sample (2)", function () {
         var result = Protocol.sample([
             {address:"a"},{address:"b"},{address:"c"}],2);

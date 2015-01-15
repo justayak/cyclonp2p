@@ -29,42 +29,33 @@ $(function () {
 
 
     var cyclon = new Cyclon.Class();
+    cyclon.ready(function () {
+        console.log("OPEN");
+    });
 
-    console.log(cyclon);
-
-
-
-    var applyAnswer = null;
-
-    //$("#address").html(Cyclon.Cyclon.address());
+    $("#address").html(cyclon.address);
 
     $("#active").on('click', function () {
-        applyAnswer = Cyclon.bootstrap({}, {
-            onOffer: function (offer) {
-                $("#txt").val(offer);
-            }
-        }, function () {
-            console.log("OPEN");
+        cyclon.launch( function onOffer (offer) {
+            console.log("offer", offer);
+            $("#txt").val(offer);
         });
     });
 
     $("#passive").on('click', function () {
         var offer = $("#txt").val();
         $("#txt").val("");
-        applyAnswer = Cyclon.bootstrap({}, {
-            onAnswer: function (answer) {
-                $("#txt").val(answer);
-            },
-            offer: offer
-        }, function () {
-            console.log("OPEN");
+        console.log("offer", offer);
+        cyclon.answer( offer,
+        function onAnswer (answer) {
+            $("#txt").val(answer);
         });
     });
 
     $("#active2").on('click', function () {
-        if (applyAnswer === null) throw new Error("noo, we must bootstrap cyclon first!");
         var answer = $("#txt").val();
-        applyAnswer(answer);
+        console.log("offer", answer);
+        cyclon.handshake(answer);
     });
 
 });
