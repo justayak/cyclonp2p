@@ -31,13 +31,19 @@ $(function () {
     var cyclon = new Cyclon.Class();
     cyclon.ready(function () {
         console.log("OPEN");
+        setTimeout(function () {
+            var peers = cyclon.getPeers();
+            var i = 0, L = peers.length;
+            for(;i<L;i++) {
+                peers[i].send("Hi");
+            }
+        },2000);
     });
 
     $("#address").html(cyclon.address);
 
     $("#active").on('click', function () {
-        cyclon.launch( function onOffer (offer) {
-            console.log("offer", offer);
+        cyclon.launch(function onOffer (offer) {
             $("#txt").val(offer);
         });
     });
@@ -45,7 +51,6 @@ $(function () {
     $("#passive").on('click', function () {
         var offer = $("#txt").val();
         $("#txt").val("");
-        console.log("offer", offer);
         cyclon.answer( offer,
         function onAnswer (answer) {
             $("#txt").val(answer);
@@ -54,7 +59,6 @@ $(function () {
 
     $("#active2").on('click', function () {
         var answer = $("#txt").val();
-        console.log("offer", answer);
         cyclon.handshake(answer);
     });
 
