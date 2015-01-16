@@ -60,6 +60,10 @@ describe("init", function () {
             {address:"b",age:3}
         ]);
     });
+    it("should merge empty correctly", function () {
+        var result = Protocol.merge([], [{address:'a', age:2}],[],4);
+        expect(result.result).toEqual([{address:'a', age:2}]);
+    });
 
     /**
      * Sort a list of Nodes by age (descending):

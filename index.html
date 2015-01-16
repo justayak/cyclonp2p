@@ -21,7 +21,13 @@
 <button id="active2">active->accept</button>
 <button id="passive">passive</button>
 <br/>
-<textarea id="txt" placeholder="data"></textarea>
+<div style="position: relative;">
+    <textarea style="float:left; width: 500px;" id="txt" placeholder="data"></textarea>
+    <div style="float:right;" id="neighbors">
+
+    </div>
+</div>
+
 
 </body>
 <script>
@@ -29,13 +35,25 @@ $(function () {
 
 
     var cyclon = new Cyclon.Class();
+
+
+    setInterval(function () {
+        var peers = cyclon.getPeers();
+        var i = 0, L = peers.length;
+        var str = "";
+        for(;i<L;i++) {
+            str += peers[i].address + '<br>';
+        }
+        $('#neighbors').html(str);
+    },100);
+
     cyclon.ready(function () {
         console.log("OPEN");
         setTimeout(function () {
             var peers = cyclon.getPeers();
             var i = 0, L = peers.length;
             for(;i<L;i++) {
-                peers[i].send("Hi");
+                //peers[i].send("Hi");
             }
         },2000);
     });
@@ -61,6 +79,7 @@ $(function () {
         var answer = $("#txt").val();
         cyclon.handshake(answer);
     });
+
 
 });
 </script>
