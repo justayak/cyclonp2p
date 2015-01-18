@@ -33,9 +33,7 @@
 <script>
 $(function () {
 
-
     var cyclon = new Cyclon.Class();
-
 
     setInterval(function () {
         var peers = cyclon.getPeers();
@@ -48,7 +46,7 @@ $(function () {
     },1000);
 
     cyclon.ready(function () {
-
+        console.log('open!');
     });
 
     $("#address").html(cyclon.address);
