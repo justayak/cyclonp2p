@@ -5,6 +5,10 @@ var Protocol = require("./../../lib/protocol.js");
 
 describe("init", function () {
 
+    // ===========================================================
+    // ***********************************************************
+    // ===========================================================
+
     /**
      * [Nodes] = Protocol.exclude([Nodes], [ExclusionItems])
      *
@@ -15,6 +19,10 @@ describe("init", function () {
             ["b","c"]);
         expect(result).toEqual([{address:"a"}]);
     });
+
+    // ===========================================================
+    // ***********************************************************
+    // ===========================================================
     it("should exclude objects", function () {
         var result = Protocol.exclude(
             [{address:"a"},{address:"b"},{address:"c"}],
@@ -22,18 +30,27 @@ describe("init", function () {
         expect(result).toEqual([{address:"a"}]);
     });
 
+    // ===========================================================
+    // ***********************************************************
+    // ===========================================================
     it("should sample (2)", function () {
         var result = Protocol.sample([
             {address:"a"},{address:"b"},{address:"c"}],2);
         expect(result.length).toEqual(2);
     });
 
+    // ===========================================================
+    // ***********************************************************
+    // ===========================================================
     it("should sample (3)", function () {
         var result = Protocol.sample([
             {address:"a"},{address:"b"},{address:"c"}],["b","c"],2);
         expect(result.length).toEqual(1);
     });
 
+    // ===========================================================
+    // ***********************************************************
+    // ===========================================================
     /**
      * {result:[Nodes|c],removed:[Nodes]} = Protocol.merge(
      *      partialView [Nodes],
@@ -47,9 +64,8 @@ describe("init", function () {
              [{address:"a", age:2},{address:"b", age:3},{address:"c", age:1}],
              [{address:"a", age:5},{address:"b", age:11},{address:"d",age:2},{address:"e",age:6}],
              [{address:"b", age:3}],
-             4
+             4, ''
          );
-        //console.log(result);
         expect(result.result).toEqual([
             {address:"a",age:2},
             {address:"c",age:1},
@@ -60,11 +76,97 @@ describe("init", function () {
             {address:"b",age:3}
         ]);
     });
+
+    // ===========================================================
+    // ***********************************************************
+    // ===========================================================
     it("should merge empty correctly", function () {
-        var result = Protocol.merge([], [{address:'a', age:2}],[],4);
+        var result = Protocol.merge([], [{address:'a', age:2}],[],4, '');
         expect(result.result).toEqual([{address:'a', age:2}]);
     });
 
+    // ===========================================================
+    // ***********************************************************
+    // ===========================================================
+    it("should merge correctly with exclude", function () {
+        var result = Protocol.merge(
+            [{address:"a", age:2},{address:"b", age:3},{address:"c", age:1}],
+            [{address:"a", age:5},{address:"b", age:11},{address:"d",age:2},{address:"e",age:6}],
+            [{address:"b", age:3}],
+            4, 'e'
+        );
+        expect(result.result).toEqual([
+            {address:"a",age:2},
+            {address:"c",age:1},
+            {address:"d",age:2},
+            {address:"b",age:3}
+        ]);
+        expect(result.removed).toEqual([]);
+    });
+
+    // ===========================================================
+    // ***********************************************************
+    // ===========================================================
+    it("should merge correctly with exclude 2", function () {
+        var result = Protocol.merge(
+            [{address:"a", age:2}],
+            [{address:"a", age:5},{address:"b", age:11}],
+            [{address:"b", age:0}],
+            4, 'b'
+        );
+        expect(result.result).toEqual([
+            {address:"a",age:2}
+        ]);
+        expect(result.removed).toEqual([]);
+    });
+
+    // ===========================================================
+    // ***********************************************************
+    // ===========================================================
+    it('should delete correctly', function () {
+        var result = Protocol.delete(
+            [{address: 'a'},{address: 'b'},{address: 'c'},{address: 'd'},{address: 'e'}],
+            'a'
+        );
+        expect(result).toEqual([{address: 'b'},{address: 'c'},{address: 'd'},{address: 'e'}]);
+    });
+
+    // ===========================================================
+    // ***********************************************************
+    // ===========================================================
+    it('should delete nothing', function () {
+        var result = Protocol.delete(
+            [{address: 'a'},{address: 'b'},{address: 'c'},{address: 'd'},{address: 'e'}],
+            'f'
+        );
+        expect(result).toEqual([{address: 'a'},{address: 'b'},{address: 'c'},{address: 'd'},{address: 'e'}]);
+    });
+
+    // ===========================================================
+    // ***********************************************************
+    // ===========================================================
+    it('should delete correctly in the middle', function () {
+        var result = Protocol.delete(
+            [{address: 'a'},{address: 'b'},{address: 'c'},{address: 'd'},{address: 'e'}],
+            'c'
+        );
+        expect(result).toEqual([{address: 'a'},{address: 'b'},{address: 'd'},{address: 'e'}]);
+    });
+
+    // ===========================================================
+    // ***********************************************************
+    // ===========================================================
+    it('should delete correctly at the end', function () {
+        var result = Protocol.delete(
+            [{address: 'a'},{address: 'b'},{address: 'c'},{address: 'd'},{address: 'e'}],
+            'e'
+        );
+        expect(result).toEqual([{address: 'a'},{address: 'b'},{address: 'c'},{address: 'd'}]);
+    });
+
+    // ===========================================================
+    // ***********************************************************
+    // ===========================================================
     /**
      * Sort a list of Nodes by age (descending):
      * [{address:"a",age:1},{address:"c",age:3},...]
@@ -79,7 +181,9 @@ describe("init", function () {
         ]);
     });
 
-
+    // ===========================================================
+    // ***********************************************************
+    // ===========================================================
     it("should parse correctly", function () {
         var list = [
             {address:"a",age:12},
@@ -92,6 +196,9 @@ describe("init", function () {
         expect(obj).toEqual(list);
     });
 
+    // ===========================================================
+    // ***********************************************************
+    // ===========================================================
     it("should find the oldest element", function () {
         var list = [
             {address:"a",age:12},
@@ -103,6 +210,9 @@ describe("init", function () {
         expect(oldest).toEqual({address:"a",age:12});
     });
 
+    // ===========================================================
+    // ***********************************************************
+    // ===========================================================
     it("should increase the age", function () {
         var result = Protocol.increaseAge([
             {address:"a",age:12},

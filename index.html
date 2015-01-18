@@ -39,13 +39,14 @@ $(function () {
 
     setInterval(function () {
         var peers = cyclon.getPeers();
+        if (peers.length > 0) console.log(peers);
         var i = 0, L = peers.length;
         var str = "";
         for(;i<L;i++) {
             str += peers[i].address + '<br>';
         }
         $('#neighbors').html(str);
-    },100);
+    },1000);
 
     cyclon.ready(function () {
         console.log("OPEN");
