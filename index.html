@@ -39,7 +39,6 @@ $(function () {
 
     setInterval(function () {
         var peers = cyclon.getPeers();
-        if (peers.length > 0) console.log(peers);
         var i = 0, L = peers.length;
         var str = "";
         for(;i<L;i++) {
@@ -49,14 +48,7 @@ $(function () {
     },1000);
 
     cyclon.ready(function () {
-        console.log("OPEN");
-        setTimeout(function () {
-            var peers = cyclon.getPeers();
-            var i = 0, L = peers.length;
-            for(;i<L;i++) {
-                //peers[i].send("Hi");
-            }
-        },2000);
+
     });
 
     $("#address").html(cyclon.address);
